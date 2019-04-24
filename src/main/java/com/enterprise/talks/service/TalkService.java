@@ -41,9 +41,9 @@ public interface TalkService {
 	 * Add {@link Participant} to a {@link Talk}
 	 *
 	 * @param talkId
-	 * @param participants
+	 * @param participant
 	 */
-	void addParticipant(final String talkId, final Participant participants);
+	void addParticipant(final String talkId, final Participant participant);
 
 	/**
 	 * List inactive {@link Participant} of a {@link Talk}
