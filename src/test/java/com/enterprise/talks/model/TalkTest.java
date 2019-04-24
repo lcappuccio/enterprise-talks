@@ -7,8 +7,7 @@ import org.junit.rules.ExpectedException;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class TalkTest {
 
@@ -37,6 +36,14 @@ public class TalkTest {
 		sut.addParticipant(participantB);
 
 		sut.setInactiveParticipant(inactiveParticipant);
+	}
+
+	@Test
+	public void should_have_id() {
+		sut = new Talk();
+		final String id = sut.getTalkId();
+
+		assertNotNull(id);
 	}
 
 	@Test
