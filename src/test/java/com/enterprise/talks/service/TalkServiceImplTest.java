@@ -135,6 +135,29 @@ public class TalkServiceImplTest {
 		sut.getInactiveParticipants("NON_EXISTING_TALK_ID");
 	}
 
+	@Test
+	public void should_return_random_participant() {
+
+		final String talkId = createTalk();
+
+		sut.addParticipant(talkId, participantA);
+		sut.addParticipant(talkId, participantB);
+		sut.setInactiveParticipant(talkId, inactiveParticipant);
+
+		final Participant randomParticipant = sut.extractRandomParticipantFrom(talkId);
+
+		assertNotNull(randomParticipant);
+		assertNotEquals(inactiveParticipant, randomParticipant);
+	}
+
+	@Test
+	public void should_not_return_random_participant_from_nonexisting_talk() {
+
+		expectedException.expect(IllegalArgumentException.class);
+		sut.extractRandomParticipantFrom("NON_EXISTING_TALK_ID");
+	}
+
+
 	private String createTalk() {
 		return sut.createTalk();
 	}

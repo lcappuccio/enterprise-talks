@@ -3,9 +3,7 @@ package com.enterprise.talks.service;
 import com.enterprise.talks.model.Participant;
 import com.enterprise.talks.model.Talk;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class TalkServiceImpl implements TalkService {
 
@@ -54,6 +52,21 @@ public class TalkServiceImpl implements TalkService {
 	public void setInactiveParticipant(final String talkId, final Participant participant) {
 		validateTalkId(talkId);
 		talks.get(talkId).setInactiveParticipant(participant);
+	}
+
+	@Override
+	public Participant extractRandomParticipantFrom(final String talkId) {
+
+		validateTalkId(talkId);
+
+		final List<Participant> participants = new ArrayList<>(talks.get(talkId).getParticipants());
+		participants.removeAll(getInactiveParticipants(talkId));
+		final Random random = new Random();
+
+		final int totalParticipants = participants.size();
+		final int randomParticipantIndex = random.nextInt(totalParticipants);
+
+		return participants.get(randomParticipantIndex);
 	}
 
 	void validateTalkId(final String talkId) {
