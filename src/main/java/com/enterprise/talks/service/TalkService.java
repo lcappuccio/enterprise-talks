@@ -61,4 +61,12 @@ public interface TalkService {
 	 */
 	void setInactiveParticipant(final String talkId, final Participant participant);
 
+	/**
+	 * Extract a random participant from a given {@link Talk}
+	 *
+	 * @param talkId
+	 * @return
+	 */
+	Participant extractRandomParticipantFrom(final String talkId);
+
 }
